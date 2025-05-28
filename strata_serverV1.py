@@ -16,7 +16,7 @@ def get_base_price():
         response = requests.get(sheet_url)
         lines = response.text.splitlines()
 
-        for row in lines[1:]:  # Skip header
+        for row in lines:  # Skip header
             cells = row.split(',')
             if len(cells) >= 2 and cells[0].strip().upper() == symbol:
                 return jsonify({'base_price': float(cells[1])})
