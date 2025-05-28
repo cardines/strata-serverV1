@@ -30,23 +30,24 @@ def check_license():
     import csv
     from flask import request
 
-    machine_id = request.args.get('id', '').strip()
-    if not machine_id:
-        return jsonify({'error': 'Missing id parameter'})
+    signed_id = request.args.get('signedId', '').strip()
+    if not signed_id:
+        return jsonify({'error': 'Missing signedId parameter'})
 
-    sheet_url = "https://docs.google.com/spreadsheets/d/16hL7uCokQG5KbEtu-MAZBcUhzO6DASa06sG1_2ROhsI/export?format=csv"
+    sheet_url = "https://docs.google.com/spreadsheets/d/your-sheet-id/export?format=csv"
     try:
         response = requests.get(sheet_url)
         lines = response.text.splitlines()
         reader = csv.reader(lines)
 
         for row in reader:
-            if len(row) > 0 and row[0].strip() == machine_id:
+            if len(row) > 0 and row[0].strip() == signed_id:
                 return jsonify({'licensed': True})
 
         return jsonify({'licensed': False})
     except Exception as e:
         return jsonify({'error': str(e)})
+
 
 if __name__ == '__main__':
     import os
