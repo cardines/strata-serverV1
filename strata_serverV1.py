@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/baseprice')
 def get_base_price():
-    sheet_url = 'https://docs.google.com/spreadsheets/d/e/your-sheet-id/pub?output=csv'
+    sheet_url = "https://docs.google.com/spreadsheets/d/16hL7uCokQG5KbEtu-MAZBcUhzO6DASa06sG1_2ROhsI/export?format=csv"
     try:
         response = requests.get(sheet_url)
         lines = response.text.splitlines()
