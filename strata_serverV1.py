@@ -25,12 +25,6 @@ def get_base_price():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-
-if __name__ == '__main__':
-    import os
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
-
 @app.route('/license')
 def check_license():
     import csv
@@ -53,4 +47,11 @@ def check_license():
         return jsonify({'licensed': False})
     except Exception as e:
         return jsonify({'error': str(e)})
+
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
+
 
